@@ -1,48 +1,169 @@
-## ✨ Features
-- **Real-Time Streaming:** Watch your 7-day workout plan generate live, character by character, for an instant, interactive experience.
-- **Personalized Workouts:** Generated using the Gemini 3.8 Flash model.
-- **Nutrition & Recovery Tips:** Tailored tips based on your goal.
-- **Feedback Loop:** Users can submit feedback and get an updated plan instantly.
-- **SQLite Database:** Stores users and their original + updated plans.
-- **Admin Dashboard:** View all users and their plans.# FitBuddy: AI Fitness Plan Generator using Gemini Models
+# FitBuddy: AI Fitness Plan Generator using Gemini Models
 
-FitBuddy is a web-based application that uses AI to generate personalized 3-day workout plans and nutrition tips based on a user's fitness goals, such as weight loss, muscle gain, or general wellness. The app streams the workout plan in real-time for an instant, interactive experience.
+FitBuddy is an AI-powered web application that generates **personalized 7-day workout plans, nutrition guidance, and recovery tips** based on a user's fitness goals. The application uses **Google Gemini** to create customized fitness plans and provides a real-time streaming experience for an interactive and engaging user experience.
 
 ## ✨ Features
-- **Real-Time Streaming:** Watch your 3-day workout plan generate live, character by character.
-- **Personalized Workouts:** Generated using the Gemini 3.8 Flash model.
-- **Nutrition & Recovery Tips:** Tailored tips based on your goal.
-- **Feedback Loop:** Users can submit feedback and get an updated plan instantly.
-- **SQLite Database:** Stores users and their original + updated plans.
-- **Admin Dashboard:** View all users and their plans.
+
+* **⚡ Real-Time Streaming:** Watch your personalized 7-day workout plan generate live, character by character, for an instant and interactive experience.
+* **🏋️ Personalized Workout Plans:** Generate customized 7-day workout plans based on fitness goals such as weight loss, muscle gain, fitness improvement, and general wellness.
+* **🥗 Nutrition & Recovery Tips:** Receive AI-generated nutrition recommendations and recovery guidance tailored to your fitness goal.
+* **🔄 Feedback Loop:** Submit feedback about your generated plan and receive an updated workout plan based on your feedback.
+* **💾 SQLite Database:** Securely stores user information along with their original and updated fitness plans.
+* **👨‍💼 Admin Dashboard:** Allows administrators to view registered users and their generated workout plans.
+* **🤖 AI-Powered Generation:** Uses Google's Gemini model to generate personalized fitness recommendations.
 
 ## 🛠️ Tech Stack
-- **Backend:** FastAPI, Python, SQLAlchemy
-- **Database:** SQLite
-- **Frontend:** HTML, CSS, JavaScript, Jinja2
-- **AI:** Google Gemini (`gemini-3.8-flash`) via the `google-genai` SDK (Interactions API)
+
+### Backend
+
+* **Python**
+* **FastAPI**
+* **SQLAlchemy**
+
+### Database
+
+* **SQLite**
+
+### Frontend
+
+* **HTML**
+* **CSS**
+* **JavaScript**
+* **Jinja2 Templates**
+
+### AI
+
+* **Google Gemini**
+* **`google-genai` SDK**
+* **Gemini Interactions API**
 
 ## 🚀 How to Run Locally
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/tamilarasi281006/FitBuddy.git
-   cd FitBuddy
+### 1. Clone the Repository
 
-   # FitBuddy
+```bash
+git clone https://github.com/tamilarasi281006/FitBuddy.git
+cd FitBuddy
+```
 
-An AI-powered fitness and nutrition assistant built with FastAPI and Google Gemini.
+### 2. Create a Virtual Environment
 
-## Features
-- Generate personalized workout plans
-- Get nutrition tips
-- Update plans based on user feedback
-- View all users and their plans
+```bash
+python -m venv venv
+```
 
-## Setup
-1. Clone the repo
-2. Create a virtual environment: `python -m venv venv`
-3. Activate it: `venv\Scripts\activate` (Windows)
-4. Install dependencies: `pip install -r requirements.txt`
-5. Create a `.env` file with your `GEMINI_API_KEY`
-6. Run: `uvicorn app.main:app --reload`
+### 3. Activate the Virtual Environment
+
+**Windows:**
+
+```bash
+venv\Scripts\activate
+```
+
+### 4. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 5. Configure the Gemini API Key
+
+Create a `.env` file in the project root directory:
+
+```env
+GEMINI_API_KEY=your_gemini_api_key
+```
+
+Replace `your_gemini_api_key` with your actual Google Gemini API key.
+
+### 6. Run the Application
+
+```bash
+uvicorn app.main:app --reload
+```
+
+The application will be available locally at:
+
+```text
+http://127.0.0.1:8000
+```
+
+## 📂 Project Overview
+
+FitBuddy follows a simple web application architecture:
+
+```text
+FitBuddy/
+│
+├── app/
+│   ├── main.py
+│   ├── models/
+│   ├── routes/
+│   ├── templates/
+│   └── static/
+│
+├── requirements.txt
+├── .env
+├── README.md
+└── ...
+```
+
+## 🔄 Application Workflow
+
+```text
+User
+  ↓
+Enter Fitness Details & Goal
+  ↓
+FitBuddy Backend
+  ↓
+Google Gemini AI
+  ↓
+Generate 7-Day Fitness Plan
+  ↓
+Real-Time Streaming
+  ↓
+Workout + Nutrition + Recovery Tips
+  ↓
+User Feedback
+  ↓
+Updated Personalized Plan
+  ↓
+SQLite Database
+```
+
+## 🎯 Supported Fitness Goals
+
+FitBuddy can generate plans based on goals such as:
+
+* Weight Loss
+* Muscle Gain
+* General Fitness
+* Strength Improvement
+* Overall Wellness
+
+## 🔐 Environment Variables
+
+The application requires the following environment variable:
+
+| Variable         | Description                                                       |
+| ---------------- | ----------------------------------------------------------------- |
+| `GEMINI_API_KEY` | Google Gemini API key used for AI-powered fitness plan generation |
+
+> **Important:** Never commit your `.env` file or API key to GitHub. Add `.env` to your `.gitignore` file.
+
+## 📌 Future Enhancements
+
+* User authentication and authorization
+* Progress tracking
+* Workout completion tracking
+* BMI and fitness-level analysis
+* Weekly progress reports
+* Personalized meal plans
+* Workout history
+* Advanced admin analytics
+* Mobile-responsive improvements
+
+## 📄 License
+
+This project is developed for educational and academic purposes.
