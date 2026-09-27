@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your 3-Day Workout Plan</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Your Personalized 3-Day Workout Plan</h1>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        {% if username %}
+        <div class="card">
+            <h3>User Information</h3>
+            <p><b>Name:</b> {{ username }}</p>
+            <p><b>User ID:</b> {{ user_id }}</p>
+            <p><b>Age:</b> {{ age }}</p>
+            <p><b>Weight:</b> {{ weight }} kg</p>
+            <p><b>Goal:</b> {{ goal }}</p>
+            <p><b>Intensity:</b> {{ intensity }}</p>
+        </div>
+        {% endif %}
+
+        <div class="card">
+            <h3>Workout Plan</h3>
+            <pre id="workout-plan-text">{{ workout_plan }}</pre>
+        </div>
+
+        <div class="card">
+            <h3>Nutrition Tip</h3>
+            <p id="nutrition-tip-text">{{ nutrition_tip }}</p>
+        </div>
+
+        <div class="card">
+            <h3>📝 Share Your Feedback</h3>
+            <form action="/submit-feedback" method="post">
+                <label>Your User ID:</label>
+                <input type="number" name="user_id" required>
+
+                <label>Your Feedback:</label>
+                <textarea name="feedback" rows="4" placeholder="e.g., Add more cardio, include rest days..." required></textarea>
+
+                <button type="submit">Submit Feedback</button>
+            </form>
+        </div>
+
+        <p style="text-align:center;">
+            <a href="/">← Back to Home</a>
+        </p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const planPre = document.getElementById('workout-plan-text');
+            const tipP = document.getElementById('nutrition-tip-text');
+            const user_id = "{{ user_id }}";
+            const goal = "{{ goal }}";
+            const intensity = "{{ intensity }}";
+
+            // Only stream if we have a goal and intensity, and the plan is a placeholder
+            if (planPre && planPre.textContent.includes("Generating your plan")) {
+                streamPlan();
+                fetchTip();
+            }
+
+            async function streamPlan() {
+                try {
+                    const url = `/stream-workout?goal=${encodeURIComponent(goal)}&intensity=${encodeURIComponent(intensity)}&user_id=${encodeURIComponent(user_id)}`;
+                    const response = await fetch(url);
+                    const reader = response.body.getReader();
+                    const decoder = new TextDecoder();
+                    let planText = "";
+                    planPre.textContent = ""; // Clear placeholder
+
+                    while (true) {
+                        const { done, value } = await reader.read();
+                        if (done) break;
+                        const chunk = decoder.decode(value, { stream: true });
+                        planText += chunk;
+                        planPre.textContent = planText;
+                    }
+                } catch (error) {
+                    planPre.textContent = "Error loading plan: " + error.message;
+                }
+            }
+
+            async function fetchTip() {
+                try {
+                    const url = `/generate-tip?goal=${encodeURIComponent(goal)}`;
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    tipP.textContent = data.tip;
+                } catch (error) {
+                    tipP.textContent = "Error loading tip: " + error.message;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
