@@ -56,7 +56,7 @@ GEMINI_API_KEY=your_api_key_here
 Run the project using:
 
 ```bash
-python app.py
+uvicorn app.main:app --reload
 ```
 
 The application will start locally. Open the URL shown in the terminal, usually:
