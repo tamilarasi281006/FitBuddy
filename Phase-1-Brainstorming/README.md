@@ -1,0 +1,3 @@
+# Phase 1: Brainstorming
+- **Problem:** People struggle to find personalized fitness and nutrition plans that match their age, weight, goals, and preferred intensity. Generic online plans don't adapt to individual progress or feedback.
+- **Solution:** An AI-powered fitness assistant called **FitBuddy** that generates personalized workout plans and nutrition tips using Google Gemini, with a live-streaming response and a feedback loop that updates the plan over time.
